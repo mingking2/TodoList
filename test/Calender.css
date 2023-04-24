@@ -1,0 +1,89 @@
+* {
+    margin: 0;  
+    padding: 0;
+    font-family: "Montserrat",sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('https://t1.daumcdn.net/news/202210/02/sportskhan/20221002100145635chce.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.calender {
+    /* margin-top: 200px; */
+    position: relative;
+    width: 300px;
+    height: 320px;
+    overflow: hidden;
+    text-align: center;
+    background-color:#FFFFFF;
+    border-radius: 15px;
+}
+
+h1 {
+    position: relative;
+    text-align: center;
+    color: white;
+    background-color: rgb(31, 152, 88);
+}
+
+.upper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: #042404;
+}
+
+.lower {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 220px;
+    font-size: 16px;
+}
+
+#month {
+    font-size: 70px;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+#date {
+    margin-bottom: 5px;
+    font-size: 130px;
+    font-weight: 900;
+    line-height: 1;
+    color: #333333;
+}
+
+body::after {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 100% ;
+    background-color: #000000;
+    position: absolute;
+    z-index: -1;
+    opacity: .5;
+}
+
+.calender {
+    position: relative;
+    width: 300px;
+    height: 320px;
+    overflow: hidden;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 15px;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent, white);
+
+}
+
