@@ -1,9 +1,8 @@
 const date = new Date();
-const currentMonth = date.getMonth();
-const currentYear = date.getFullYear();
-const currentDate = date.getDate();
 
-const makeCalendar = () => {
+export const init = (date) => makeCalendar(date);
+
+const makeCalendar = (date) => {
     /*새로운 Date객체를 생성할 때, 파라미터 date에 해당하는 부분에 0을 전달하게 되면, 지난달의 마지막 날의 Date 객체가 생성된다. */
     const viewYear = date.getFullYear();
     const viewMonth = date.getMonth();
@@ -18,7 +17,7 @@ const makeCalendar = () => {
 
     const TLDate = thisLast.getDate(); // 이번달 마지막 날짜
     const TLDay = thisLast.getDay(); // 이번달 마지막 요일
-    todaylast = TLDay;
+
 
     const prevDates = [];
     const thisDates = [...Array(TLDate + 1).keys()].slice(1);
@@ -26,17 +25,21 @@ const makeCalendar = () => {
 
     // 지난달 마지막 요일이 토요일이라면 그냥 첫번째인 월요일부터 채우면 되기때문에 반복문을 돌 필요가 없다.
     if (PLDay !== 6) {
-        for (let i = 0; i < PLDay + 1; i++) {
+        Array.from({length: PLDay + 1 }, (_,i) => {
             prevDates.unshift(PLDate - i);
             // unshift 메서드를 통해 배열에 앞쪽으로 계속 채워넣는다.
-        }
+        });
     }
 
-    for (let i = 1; i < 7 - TLDay; i++) {
-        nextDates.push(i);
-    }
+    Array.from({length: 6-TLDay}, (_,i) => {
+        nextDates.push(i+1);
+    }); 
 
-    dates = prevDates.concat(thisDates, nextDates);
+    // for (let i = 1; i < 7 - TLDay; i++) {
+        
+    // }
+
+    const dates = prevDates.concat(thisDates, nextDates);
 
     // Dates 정리
     const firstDataIndex = dates.indexOf(1);
@@ -47,37 +50,18 @@ const makeCalendar = () => {
             ? 'this'
             : 'other';
 
-
-        if (condition === 'this' && dates[i] === currentDate) {
-            dates[i] = `<span class="${condition}" id="today">${date}</span>`;
-        }
-        else {
-            dates[i] = `<span class="${condition}">${date}</span>`;
-        }
+        dates[i] = `<span class="${condition}">${date}</span>`;
+        // 오늘은 따로 뺀다
     })
+
+    renderCalendar(dates);
 }
 
-
-
-const renderCalendar = () => {
+const renderCalendar = (dates) => {
     dates.forEach((date, i) => {
         dates[i] = `<div class="date">${date}</div>`;
     })
     document.querySelector('.dates').innerHTML = dates.join('');
 }
 
-const moveMonth = (loc) => {
-    date.setDate(1);
-    loc === 0 ? date.setMonth(currentMonth) : date.setMonth(date.getMonth() + loc)
-    init();
-}
-
-const init = () => {
-    makeCalendar();
-    renderCalendar();
-}
-
-init();
-init();
-
-
+init(date);

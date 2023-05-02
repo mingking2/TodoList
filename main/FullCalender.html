@@ -11,9 +11,9 @@
             <div class="header">
                 <div class="year-month"></div>
                 <div class="nav">   
-                    <button class="nav-btn go-prev" onclick="moveMonth(-1)">&lt;</button>
-                    <button class="nav-btn go-today" onclick="moveMonth(0)">Today</button>
-                    <button class="nav-btn go-next" onclick="moveMonth(1)">&gt;</button>
+                    <button class="nav-btn go-prev" data-loc="-1">&lt;</button>
+                    <button class="nav-btn go-today" data-loc="0">Today</button>
+                    <button class="nav-btn go-next" data-loc="1">&gt;</button>
                 </div>
             </div>
             <div class="main">
@@ -29,6 +29,7 @@
                 <div class="dates"></div>
             </div>
         </div>
-        <script src="FullCalender.js"></script>
+        <script type="module" src="FullCalender.js"></script>
+        <script type="module" src="Calender_func.js"></script>
     </body>
 </html>
