@@ -64,7 +64,7 @@ body {
     text-align: center;
 }
 
-.dates {
+.dates{
     display: flex;
     flex-flow: row wrap;
     height: 500px;
@@ -103,6 +103,11 @@ span {
     border-left: 0px;
 }
 
+.date.active {
+    background-color:rgba(57, 110, 226, 0.3);
+    color: #fff;
+}
+
 .other {
     opacity: .3;
 }
@@ -125,3 +130,4 @@ span {
     transform: translate(-50%, -50%);
     content: '';
 }
+

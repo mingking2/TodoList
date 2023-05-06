@@ -1,3 +1,6 @@
+import { showToday } from "./Calender_func.js";
+import { Pointer } from "./Calender_func.js";
+
 const date = new Date();
 
 export const init = (date) => makeCalendar(date);
@@ -21,6 +24,10 @@ const makeCalendar = (date) => {
 
     const prevDates = [];
     const thisDates = [...Array(TLDate + 1).keys()].slice(1);
+    // 0부터 TLDate까지의 숫자를 배열로 만들어준다. 
+    // ... 은 배열의 각 요소를 분리하여 개별적인 값으로 만들어준다.
+    // .keys()는 배열의 각 인덱스 번호를 차례대로 반환하여 사용자가 필요한 작업을 수행할 수 있도록 한다. 
+    // slice(1)은 이 배열에서 첫번째 요소인 0을 제외하고 1부터 끝까지의 요소만을 남긴다.
     const nextDates = [];
 
     // 지난달 마지막 요일이 토요일이라면 그냥 첫번째인 월요일부터 채우면 되기때문에 반복문을 돌 필요가 없다.
@@ -35,10 +42,6 @@ const makeCalendar = (date) => {
         nextDates.push(i+1);
     }); 
 
-    // for (let i = 1; i < 7 - TLDay; i++) {
-        
-    // }
-
     const dates = prevDates.concat(thisDates, nextDates);
 
     // Dates 정리
@@ -50,11 +53,12 @@ const makeCalendar = (date) => {
             ? 'this'
             : 'other';
 
-        dates[i] = `<span class="${condition}">${date}</span>`;
-        // 오늘은 따로 뺀다
+        dates[i] = `<span class="${condition}" data-date="${viewYear}-${viewMonth+1}-${date}" data-day="${date}">${date}</span>`;
     })
 
     renderCalendar(dates);
+    showToday(viewYear,viewMonth);
+    Pointer();
 }
 
 const renderCalendar = (dates) => {
