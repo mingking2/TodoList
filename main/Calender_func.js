@@ -1,4 +1,5 @@
 import { init } from "./FullCalender.js";
+import { settingDate } from "./TodoList.js";
 
 const date_move = new Date();
 const currentMonth_move = date_move.getMonth();
@@ -47,6 +48,8 @@ export const showToday = (viewYear, viewMonth) => {
 }
 
 export const Pointer = () => {
+    let activeCell = null;  // 현재 선택된 셀을 저장하는 변수
+
     const cells = document.querySelectorAll(".date");
 
     cells.forEach((cell) => {
@@ -58,14 +61,27 @@ export const Pointer = () => {
 
                 // active 클래스가 없으면 추가하고 있으면 삭제
                 if (!isActive) {
+                     // 기존에 선택된 셀이 있다면 active 클래스 제거
+                     if (activeCell) {
+                        activeCell.classList.remove("active");
+                    }
+                    // 현재 선택된 셀을 저장하고 active 클래스 추가
+                    activeCell = cell;
                     cell.classList.add("active");
+
+                    // 선택한 날짜 출력
+                    const click_data = spanThis.dataset.date;
+                    console.log("선택한 날짜: ", click_data);
+
+                    // 클릭한 날짜를 settingDate 함수로 전달
+                    settingDate(click_data);
                 } else {
+                    activeCell = null;
                     cell.classList.remove("active");
+                    settingDate(null);
                 }
 
-                // 선택한 날짜 출력
-                const click_data = spanThis.dataset.date;
-                console.log("선택한 날짜: ", click_data);
+
             }
         });
     });

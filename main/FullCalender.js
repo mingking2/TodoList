@@ -1,6 +1,7 @@
 import { showToday } from "./Calender_func.js";
 import { Pointer } from "./Calender_func.js";
 
+
 const date = new Date();
 
 export const init = (date) => makeCalendar(date);

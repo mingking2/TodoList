@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width initial-scale=1.0">
         <title>Full Calender</title>
         <link rel="stylesheet" href="FullCalender.css">
+        <link rel="stylesheet" href="TodoList.css">
     </head>
     <body>
         <div class="calendar">
@@ -29,7 +30,17 @@
                 <div class="dates"></div>
             </div>
         </div>
+        <div class="todo-list">
+            <h2>Todo List</h2>
+            <div id="select_date">날짜를 선택하세요</div>
+            <div class="todo-header">
+                <input type="text" id="new-todo" placeholder="Add new todo...">
+                <button id="add-todo">추가</button>    
+            </div>
+            <ul id="todo-list"></ul>
+        </div>
         <script type="module" src="FullCalender.js"></script>
         <script type="module" src="Calender_func.js"></script>
+        <script type="module" src="TodoList.js"></script>
     </body>
 </html>
