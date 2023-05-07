@@ -1,26 +1,26 @@
 const newTodoInput = document.getElementById('new-todo');
-const todoList = document.getElementById('todo-list');
+const todoList = document.getElementById('todo-list');   
 const selectDate = document.getElementById('select_date');
 
 
 export const settingDate = (data) => {
-    const clickedDate = data;
-    selectDate.innerHTML = clickedDate;
+    if(data === null) {
+        selectDate.innerHTML = "날짜를 선택하세요";
+    } else {
+        const clickedDate = data;
+        selectDate.innerHTML = clickedDate;
+    }
 }
 
 // 새로운 todo 추가
 const addTodo = () => {
-    if (newTodoInput.value.trim() === '') {
-        alert("No Data");
-        return;
-    }
     const todoListItems = todoList.querySelectorAll('.todo-item');
-    const selectedDate = selectDate.textContent.trim();
+    const selectedDate = selectDate.textContent.trim(); // 공백제거
     let todoItem = null;
 
     Array.from({length: todoListItems.length},(_,i) => {
         const todoText = todoListItems[i].querySelector('span');
-        if (todoText.textContent.startsWith(selectedDate)) {
+        if (todoText.textContent.startsWith(selectedDate)) {    // 뭐로 시작하는지
             todoItem = todoListItems[i];
             console.log(todoItem);
         }
@@ -42,7 +42,7 @@ const addTodo = () => {
         todoItem.appendChild(deleteButton);
 
         todoList.appendChild(todoItem);
-    }
+    }  
 
     // 입력한 내용을 추가
     const newTodoText = document.createElement('span');
@@ -58,16 +58,17 @@ const addTodo = () => {
 
 // todo 삭제
 const deleteTodo = (event) => {
-    const todoItem = event.target.parentNode;
+    const todoItem = event.target.parentNode; // 삭제할 부모노드(delete 버튼 상위에있는 todo-item) 찾기
     todoList.removeChild(todoItem);
 }
 
 
 document.getElementById('add-todo').addEventListener('click', function () {
-    if (selectDate.innerHTML != "") {
-        addTodo();
-    } else {
+    if (selectDate.innerHTML === "날짜를 선택하세요") {
         alert("날짜를 선택하세요");
-        newTodoInput.value = "";
+    } else if(newTodoInput.value.trim() === '') {
+        alert("입력된 데이터가 없어용");
+    } else {
+        addTodo();
     }
 });

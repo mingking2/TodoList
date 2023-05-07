@@ -22,6 +22,7 @@ next_btn.addEventListener('click', () => {
 
 const moveMonth = (loc) => {
     date_move.setDate(1); // 해당 월의 첫번째 날짜로 설정
+    settingDate(null);
     if (loc === 0) {
         date_move.setMonth(currentMonth_move);
         date_move.setFullYear(new Date().getFullYear()); // 현재 연도로 설정
@@ -80,7 +81,6 @@ export const Pointer = () => {
                     cell.classList.remove("active");
                     settingDate(null);
                 }
-
 
             }
         });
