@@ -24,3 +24,4 @@
  - 할 일 각각의 체크리스트 기능 추가
  3. Local Storage 사용
  - DB 대신 쓰는 것
+ - https://www.daleseo.com/js-web-storage/
