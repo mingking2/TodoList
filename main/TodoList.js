@@ -59,7 +59,7 @@ const addTodo = () => {
 // todo 삭제
 const deleteTodo = (event) => {
     const todoItem = event.target.parentNode; // 삭제할 부모노드(delete 버튼 상위에있는 todo-item) 찾기
-    todoList.removeChild(todoItem);
+    todoList.removeChild(todoItem);ㅌ``
 }
 
 

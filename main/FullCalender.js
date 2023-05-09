@@ -1,5 +1,5 @@
-import { showToday } from "./Calender_func.js";
-import { Pointer } from "./Calender_func.js";
+import { showToday } from "./CalenderFunction.js";
+import { Pointer } from "./CalenderFunction.js";
 
 
 const date = new Date();
