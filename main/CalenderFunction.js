@@ -8,6 +8,8 @@ const prev_btn = document.querySelector('.go-prev');
 const today_btn = document.querySelector('.go-today');
 const next_btn = document.querySelector('.go-next');
 
+
+
 prev_btn.addEventListener('click', () => {
     moveMonth(-1);
 });
@@ -50,20 +52,20 @@ export const showToday = (viewYear, viewMonth) => {
 
 export const Pointer = () => {
     let activeCell = null;  // 현재 선택된 셀을 저장하는 변수
-
     const cells = document.querySelectorAll(".date");
 
     cells.forEach((cell) => {
         cell.addEventListener('click', () => {
             const spanThis = cell.querySelector("span.this");
+            
             if (spanThis) {
                 // 현재 셀에 active 클래스가 있는지 확인
                 const isActive = cell.classList.contains("active");
 
                 // active 클래스가 없으면 추가하고 있으면 삭제
                 if (!isActive) {
-                     // 기존에 선택된 셀이 있다면 active 클래스 제거
-                     if (activeCell) {
+                    // 기존에 선택된 셀이 있다면 active 클래스 제거
+                    if (activeCell) {
                         activeCell.classList.remove("active");
                     }
                     // 현재 선택된 셀을 저장하고 active 클래스 추가
@@ -76,6 +78,19 @@ export const Pointer = () => {
 
                     // 클릭한 날짜를 settingDate 함수로 전달
                     settingDate(click_data);
+
+                    const todoListItems = document.querySelectorAll('.todo-item');
+                    console.log(todoListItems);
+                    todoListItems.forEach((todoItem) => {
+                        const liTag = todoItem.querySelector(`li[id="${spanThis.dataset.day}"]`);
+                        console.log(todoItem);
+                        if (liTag) {
+                            todoItem.style.display = "block";
+                        } else {
+                            todoItem.style.display = "none";
+                        }
+                    });
+
                 } else {
                     activeCell = null;
                     cell.classList.remove("active");
