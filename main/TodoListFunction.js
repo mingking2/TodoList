@@ -23,7 +23,7 @@ const addTodo = () => {
         const todoText = todoListItems[i].querySelector('span');
         if (todoText.textContent.startsWith(selectedDate)) {    // 뭐로 시작하는지
             todoItem = todoListItems[i];
-            console.log(todoItem);
+            //console.log(todoItem);
         }
     });
 
