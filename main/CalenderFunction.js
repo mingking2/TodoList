@@ -78,9 +78,9 @@ export const Pointer = () => {
 
                     // 클릭한 날짜를 settingDate 함수로 전달
                     settingDate(click_data);
-
+                    
                     const todoListItems = document.querySelectorAll('.todo-item');
-                    const activeDay = activeCell.querySelector("span.this").dataset.day;
+                    const activeDay = activeCell.dataset.day;
                     todoListItems.forEach((todoItem) => {
                         if (todoItem.id === activeDay) {
                             todoItem.style.display = "block";
@@ -88,7 +88,7 @@ export const Pointer = () => {
                             todoItem.style.display = "none";
                         }
                         
-                        // 해결햇다 ㅋㅋㅋ 이걸 하네
+                        // 이미 지정됫는데 왜하노 ㅄ아
                         // const liTags = todoItem.querySelectorAll('li');
                         // liTags.forEach((liTag) => {
                         //     if (liTag.id === activeDay) {
@@ -97,6 +97,8 @@ export const Pointer = () => {
                         //         todoItem.style.display = "none";
                         //     }
                         // });
+
+                        // innerHTML와 배열로 숨기고 나타내고 표현
                         
                     });
 
