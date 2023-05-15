@@ -82,8 +82,9 @@ export const Pointer = () => {
                     const todoListItems = document.querySelectorAll('.todo-item');
                     console.log(todoListItems);
                     todoListItems.forEach((todoItem) => {
-                        const liTag = todoItem.querySelector(`li[id="${spanThis.dataset.day}"]`);
-                        console.log(todoItem);
+                        const liTag = todoItem.querySelector(`li[id="${activeCell.querySelector("span.this").dataset.day}"]`);
+                        // 그냥 cell 말고 active cell, 즉 클릭되어있는 cell
+                        console.log(liTag);
                         if (liTag) {
                             todoItem.style.display = "block";
                         } else {
