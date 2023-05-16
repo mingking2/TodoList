@@ -61,7 +61,7 @@ const addTodo = () => {
     if (thisDate) {
         const dot = document.createElement('span');
         dot.classList.add('dot');
-        dot.innerHTML="·";
+        // dot.innerHTML="·";
         thisDate.parentNode.appendChild(dot);
     }
 
