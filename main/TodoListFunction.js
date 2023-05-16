@@ -29,10 +29,10 @@ const addTodo = () => {
 
     if (!todoItem) {
         todoItem = document.createElement('li');
-        todoItem.setAttribute('id',day);
+        todoItem.setAttribute('id', day);
         todoItem.classList.add('todo-item');
         const todoText = document.createElement('span');
-        todoText.setAttribute('id',selectedDate);
+        todoText.setAttribute('id', selectedDate);
         todoText.textContent = selectedDate + '\n';
         todoText.style.whiteSpace = 'pre-wrap'; // 개행 문자 적용
         todoItem.appendChild(todoText);
@@ -49,31 +49,51 @@ const addTodo = () => {
     // 삭제 버튼 생성 코드 추가
     const newDeleteButton = document.createElement('button');
     newDeleteButton.textContent = 'Delete';
-    newDeleteButton.addEventListener('click', deleteTodo);
+    newDeleteButton.addEventListener('click', (event) => {
+        deleteTodo(event, day);
+      });
     newTodoText.appendChild(newDeleteButton);
     //todoItem.style.display = 'none';
     newTodoInput.value = '';
+
+    // 점 추가
+    const thisDate = document.querySelector('.this[data-day="' + day + '"]');
+    if (thisDate) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.innerHTML="·";
+        thisDate.parentNode.appendChild(dot);
+    }
+
+
     console.log("저장되었습니다.");
-
-
 };
 
 
 
 // todo 삭제 
-const deleteTodo = (event) => { // 왜 되는건지 이해 안되는데 되긴함
-  const todoText = event.target.parentNode;
-  const todoItem = todoText.parentNode;
-  const todoList = todoItem.parentNode;
-  const todoUl = todoList.parentNode;
-  console.log(todoUl);
-  todoItem.removeChild(todoText);
+const deleteTodo = (event,day) => { // 왜 되는건지 이해 안되는데 되긴함
+    const todoText = event.target.parentNode;
+    const todoItem = todoText.parentNode;
+    const todoList = todoItem.parentNode;
+    const todoUl = todoList.parentNode;
+    todoItem.removeChild(todoText);
 
-  // 삭제한 후에 할일 목록이 비었는지 확인하여 li 태그를 삭제
-  if(todoItem.querySelectorAll('span').length===0) {
-    todoList.removeChild(todoItem);
-    todoUl.removeChild(todoList);
-  }
+    // 삭제한 후에 할일 목록이 비었는지 확인하여 li 태그를 삭제
+    if (todoItem.querySelectorAll('span').length === 0) {
+        todoList.removeChild(todoItem);
+        todoUl.removeChild(todoList);
+    }
+
+    // 점 삭제
+    const thisDate = document.querySelector(`.this[data-day="${day}"]`);
+    console.log(thisDate.parentNode);
+    if (thisDate) {
+        const dot = thisDate.parentNode.querySelector('.dot');
+        if (dot) {
+            dot.parentNode.removeChild(dot);
+        }
+    }
 }
 
 
