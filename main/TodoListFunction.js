@@ -51,7 +51,7 @@ const addTodo = () => {
     newDeleteButton.textContent = 'Delete';
     newDeleteButton.addEventListener('click', deleteTodo);
     newTodoText.appendChild(newDeleteButton);
-    todoItem.style.display = 'none';
+    //todoItem.style.display = 'none';
     newTodoInput.value = '';
     console.log("저장되었습니다.");
 
@@ -61,10 +61,19 @@ const addTodo = () => {
 
 
 // todo 삭제 
-const deleteTodo = (event) => {
+const deleteTodo = (event) => { // 왜 되는건지 이해 안되는데 되긴함
   const todoText = event.target.parentNode;
   const todoItem = todoText.parentNode;
+  const todoList = todoItem.parentNode;
+  const todoUl = todoList.parentNode;
+  console.log(todoUl);
   todoItem.removeChild(todoText);
+
+  // 삭제한 후에 할일 목록이 비었는지 확인하여 li 태그를 삭제
+  if(todoItem.querySelectorAll('span').length===0) {
+    todoList.removeChild(todoItem);
+    todoUl.removeChild(todoList);
+  }
 }
 
 
