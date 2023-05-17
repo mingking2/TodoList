@@ -45,13 +45,32 @@ const addTodo = () => {
     newTodoText.style.whiteSpace = 'pre-wrap';
     todoItem.querySelector('span').appendChild(newTodoText);
 
+    // 로컬 스토리지에 데이터 저장
+    const todoData = {
+        selectedDate: selectedDate,
+        todoText: newTodoInput.value.trim()
+    };
+
+    // 기존에 저장된 데이터 가져오기
+    let storedData = localStorage.getItem('todoData');
+    if (storedData) {
+        storedData = JSON.parse(storedData);
+    } else {
+        storedData = [];
+    }
+
+    // 새로운 데이터 추가
+    storedData.push(todoData);
+
+    // 데이터 저장
+    localStorage.setItem('todoData', JSON.stringify(storedData));
 
     // 삭제 버튼 생성 코드 추가
     const newDeleteButton = document.createElement('button');
     newDeleteButton.textContent = 'Delete';
     newDeleteButton.addEventListener('click', (event) => {
         deleteTodo(event, day);
-      });
+    });
     newTodoText.appendChild(newDeleteButton);
     //todoItem.style.display = 'none';
     newTodoInput.value = '';
@@ -72,7 +91,7 @@ const addTodo = () => {
 
 
 // todo 삭제 
-const deleteTodo = (event,day) => { // 왜 되는건지 이해 안되는데 되긴함
+const deleteTodo = (event, day) => { // 왜 되는건지 이해 안되는데 되긴함
     const todoText = event.target.parentNode;
     const todoItem = todoText.parentNode;
     const todoList = todoItem.parentNode;
@@ -84,6 +103,23 @@ const deleteTodo = (event,day) => { // 왜 되는건지 이해 안되는데 되�
         todoList.removeChild(todoItem);
         todoUl.removeChild(todoList);
     }
+
+    // 로컬 스토리지에서 데이터 불러오기
+    let storedData = localStorage.getItem('todoData');
+    if (storedData) {
+        storedData = JSON.parse(storedData);
+    } else {
+        storedData = [];
+    }
+
+    // 해당 날짜의 데이터 제거
+    const updatedData = storedData.filter(data => data.selectedDate !== day);
+
+    // 데이터 저장
+    localStorage.setItem('todoData', JSON.stringify(updatedData));
+
+    // 로컬 스토리지에서 데이터 제거
+    localStorage.removeItem('todoData');
 
     // 점 삭제
     const thisDate = document.querySelector(`.this[data-day="${day}"]`);
