@@ -36,15 +36,15 @@ const makeCalendar = (date) => {
 
     // 지난달 마지막 요일이 토요일이라면 그냥 첫번째인 월요일부터 채우면 되기때문에 반복문을 돌 필요가 없다.
     if (PLDay !== 6) {
-        Array.from({length: PLDay + 1 }, (_,i) => {
+        Array.from({ length: PLDay + 1 }, (_, i) => {
             prevDates.unshift(PLDate - i);
             // unshift 메서드를 통해 배열에 앞쪽으로 계속 채워넣는다.
         });
     }
 
-    Array.from({length: 6-TLDay}, (_,i) => {
-        nextDates.push(i+1);
-    }); 
+    Array.from({ length: 6 - TLDay }, (_, i) => {
+        nextDates.push(i + 1);
+    });
 
     const dates = prevDates.concat(thisDates, nextDates);
 
@@ -57,11 +57,11 @@ const makeCalendar = (date) => {
             ? 'this'
             : 'other';
 
-        dates[i] = `<span class="${condition}" data-date="${viewYear}-${viewMonth+1}-${date}" data-day="${date}">${date}</span>`;
+        dates[i] = `<span class="${condition}" data-date="${viewYear}-${viewMonth + 1}-${date}" data-day="${date}">${date}</span>`;
     })
 
     renderCalendar(dates);
-    showToday(viewYear,viewMonth);
+    showToday(viewYear, viewMonth);
 }
 
 const renderCalendar = (dates) => {
@@ -69,6 +69,28 @@ const renderCalendar = (dates) => {
         dates[i] = `<div class="date">${date}</div>`;
     })
     document.querySelector('.dates').innerHTML = dates.join('');
+
+    // 기존에 저장된 데이터 가져오기
+    let storedData = localStorage.getItem('todoData');
+    if (storedData) {
+        storedData = JSON.parse(storedData);
+        storedData.forEach((data) => {
+            const day = data.selectedDate.split('-')[2];
+            const thisDate = document.querySelector('.this[data-day="' + day + '"]');
+            const yearMonth = document.querySelector('.year-month').textContent;
+            const year = yearMonth.substring(0, 4);
+            const month = yearMonth[6];
+            if (thisDate && year === data.selectedDate.substring(0, 4) && month === data.selectedDate[5]) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                // dot.innerHTML="·";
+                thisDate.parentNode.appendChild(dot);
+            }
+        })
+    } else {
+        storedData = [];
+    }
+
 }
 
 init(date);
