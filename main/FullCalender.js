@@ -5,11 +5,11 @@ import { Pointer } from "./CalenderFunction.js";
 const date = new Date();
 
 export const init = (date) => {
-    makeCalendar(date);
+    makeCalender(date);
     Pointer();
 }
 
-const makeCalendar = (date) => {
+const makeCalender = (date) => {
     /*새로운 Date객체를 생성할 때, 파라미터 date에 해당하는 부분에 0을 전달하게 되면, 지난달의 마지막 날의 Date 객체가 생성된다. */
     const viewYear = date.getFullYear();
     const viewMonth = date.getMonth();
