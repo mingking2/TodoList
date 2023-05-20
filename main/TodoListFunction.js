@@ -2,7 +2,6 @@ const newTodoInput = document.getElementById('new-todo');
 const todoList = document.getElementById('todo-list');
 const selectDate = document.getElementById('select_date');
 
-
 let index=0;
 
 export const settingDate = (data) => {
@@ -21,7 +20,6 @@ const addTodo = () => {
     const day = selectedDate.split('-')[2];
     let todoItem = null;
     
-    
     Array.from({ length: todoListItems.length }, (_, i) => {
         const todoText = todoListItems[i].querySelector('span');
         if (todoText.textContent.startsWith(selectedDate)) {    // 뭐로 시작하는지
@@ -35,7 +33,7 @@ const addTodo = () => {
         todoItem = document.createElement('li');
         todoItem.setAttribute('id', day);
         todoItem.setAttribute('data-y', selectedDate.split('-')[0]);
-        todoItem.setAttribute('data-m',selectedDate.split('-')[1]);
+        todoItem.setAttribute('data-m', selectedDate.split('-')[1]);
         todoItem.classList.add('todo-item');
         const todoText = document.createElement('span');
         todoText.setAttribute('id', selectedDate);
@@ -90,11 +88,11 @@ const addTodo = () => {
     const yearMonth = document.querySelector('.year-month').textContent;
     const year = yearMonth.substring(0,3);
     const month = yearMonth[6];
-    if (thisDate && year === selectedDate.substring(0,3) && month === selectedDate[5]) {
+    if (thisDate && year === selectedDate.substring(0,3) && month === selectedDate[5]) {    // 현재 년도랑 월 안받아오면 매달 추가됨 ㅋㅋ
         const dot = document.createElement('span');
         dot.classList.add('dot');
         // dot.innerHTML="·";
-        thisDate.parentNode.appendChild(dot);
+        thisDate.parentNode.appendChild(dot);  // 캘린더에 해당하는 date태그로 가서 점을 추가한다.
     }
 
     index++;
@@ -126,7 +124,8 @@ const deleteTodo = (event, day, del_index) => { // 왜 되는건지 이해 안�
     }
 
     // 해당 날짜의 데이터 제거
-    const updatedData = storedData.filter(data => {
+    const updatedData = storedData.filter(data => { // 필터링을 통해 삭제할 데이터를 제외하고 모두 유지한다.
+        console.log(data.index);
         const yearMonth = document.querySelector('.year-month').textContent;
         const year = yearMonth.substring(0,4);
         const month = yearMonth[6];
