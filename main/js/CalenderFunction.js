@@ -27,7 +27,7 @@ const moveMonth = (loc) => {
     settingDate(null);
     const todoListItems = document.querySelectorAll('.todo-item');
     todoListItems.forEach((todoItem) => {
-        todoItem.style.display='none';
+        todoItem.style.display = 'none';
     });
     if (loc === 0) {
         date_move.setMonth(currentMonth_move);
@@ -82,20 +82,20 @@ export const Pointer = () => {
 
                     // 클릭한 날짜를 settingDate 함수로 전달
                     settingDate(click_data);
-                    
+
                     const todoListItems = document.querySelectorAll('.todo-item');
                     const activeDay = activeCell.querySelector("span.this").dataset.day;
                     const yearMonth = document.querySelector('.year-month').textContent;
                     const year = yearMonth.substring(0, 4);
                     const month = yearMonth[6];
-                    
+
                     todoListItems.forEach((todoItem) => {
                         if (todoItem.id === activeDay && todoItem.dataset.y === year && todoItem.dataset.m === month) {
                             todoItem.style.display = "block";
                         } else {
                             todoItem.style.display = "none";
                         }
-                        
+
                         // 해결햇다 ㅋㅋㅋ 이걸 하네
                         // const liTags = todoItem.querySelectorAll('li');
                         // liTags.forEach((liTag) => {
@@ -105,7 +105,7 @@ export const Pointer = () => {
                         //         todoItem.style.display = "none";
                         //     }
                         // });
-                        
+
                     });
 
 

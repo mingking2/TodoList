@@ -2,7 +2,7 @@ const newTodoInput = document.getElementById('new-todo');
 const todoList = document.getElementById('todo-list');
 const selectDate = document.getElementById('select_date');
 
-let index=0;
+let index = 0;
 
 export const settingDate = (data) => {
     if (data === null) {
@@ -19,7 +19,7 @@ const addTodo = () => {
     const selectedDate = selectDate.textContent.trim(); // 공백제거
     const day = selectedDate.split('-')[2];
     let todoItem = null;
-    
+
     Array.from({ length: todoListItems.length }, (_, i) => {
         const todoText = todoListItems[i].querySelector('span');
         if (todoText.textContent.startsWith(selectedDate)) {    // 뭐로 시작하는지
@@ -45,7 +45,7 @@ const addTodo = () => {
 
     // 입력한 내용을 추가
     const newTodoText = document.createElement('span');
-    newTodoText.setAttribute('id',`${index}`);
+    newTodoText.setAttribute('id', `${index}`);
     newTodoText.textContent = '- ' + newTodoInput.value.trim() + '\n';
     newTodoText.style.whiteSpace = 'pre-wrap';
     todoItem.querySelector('span').appendChild(newTodoText);
@@ -75,7 +75,7 @@ const addTodo = () => {
     // 삭제 버튼 생성 코드 추가
     const newDeleteButton = document.createElement('button');
     newDeleteButton.textContent = 'Delete';
-    newDeleteButton.setAttribute('id',index);
+    newDeleteButton.setAttribute('id', index);
     newDeleteButton.addEventListener('click', (event) => {
         deleteTodo(event, day, del_index);
     });
@@ -86,9 +86,9 @@ const addTodo = () => {
     // 점 추가
     const thisDate = document.querySelector('.this[data-day="' + day + '"]');
     const yearMonth = document.querySelector('.year-month').textContent;
-    const year = yearMonth.substring(0,3);
+    const year = yearMonth.substring(0, 3);
     const month = yearMonth[6];
-    if (thisDate && year === selectedDate.substring(0,3) && month === selectedDate[5]) {    // 현재 년도랑 월 안받아오면 매달 추가됨 ㅋㅋ
+    if (thisDate && year === selectedDate.substring(0, 3) && month === selectedDate[5]) {    // 현재 년도랑 월 안받아오면 매달 추가됨 ㅋㅋ
         const dot = document.createElement('span');
         dot.classList.add('dot');
         // dot.innerHTML="·";
@@ -127,10 +127,10 @@ const deleteTodo = (event, day, del_index) => { // 왜 되는건지 이해 안�
     const updatedData = storedData.filter(data => { // 필터링을 통해 삭제할 데이터를 제외하고 모두 유지한다.
         console.log(data.index);
         const yearMonth = document.querySelector('.year-month').textContent;
-        const year = yearMonth.substring(0,4);
+        const year = yearMonth.substring(0, 4);
         const month = yearMonth[6];
-        if(data.selectedDate.split('-')[2] === day && data.selectedDate.split('-')[0] === year && data.selectedDate.split('-')[1] === month) {
-            if(data.index !== del_index) {
+        if (data.selectedDate.split('-')[2] === day && data.selectedDate.split('-')[0] === year && data.selectedDate.split('-')[1] === month) {
+            if (data.index !== del_index) {
                 return true;
             }
         } else {
@@ -157,68 +157,68 @@ const deleteTodo = (event, day, del_index) => { // 왜 되는건지 이해 안�
 const loadTodoItems = () => {
     // 기존의 todo 아이템을 지웁니다.
     todoList.innerHTML = '';
-  
+
     // 로컬 스토리지에서 저장된 todo 데이터를 가져옵니다.
     let storedData = localStorage.getItem('todoData');
     if (storedData) {
-      storedData = JSON.parse(storedData);
-    
-      // 날짜별로 todo 아이템을 그룹화합니다.
-      const groupedData = {};
-      storedData.forEach(data => {
-        const { selectedDate, index, todoText } = data;
-        if (!groupedData[selectedDate]) {
-          groupedData[selectedDate] = [];
-        }
-        groupedData[selectedDate].push({ index, todoText });
-      });
-  
-      // 그룹화된 데이터를 기반으로 todo 아이템 엘리먼트를 생성합니다.
-      for (const selectedDate in groupedData) {
-        const day = selectedDate.split('-')[2];
-        
-        const todoItemElement = document.createElement('li');
-        todoItemElement.setAttribute('id', day);
-        todoItemElement.setAttribute('data-y', selectedDate.split('-')[0]);
-        todoItemElement.setAttribute('data-m',selectedDate.split('-')[1]);
-        todoItemElement.classList.add('todo-item');
-  
-        const todoTextElement = document.createElement('span');
-        todoTextElement.setAttribute('id', selectedDate);
-        todoTextElement.textContent = selectedDate + '\n';
-        todoTextElement.style.whiteSpace = 'pre-wrap';
-  
-        groupedData[selectedDate].forEach(({ index, todoText }) => {
-          const todoTextItem = document.createElement('span');
-          todoTextItem.setAttribute('id', index);
-          todoTextItem.textContent = '- ' + todoText + '\n';
-          todoTextItem.style.whiteSpace = 'pre-wrap';
-  
-          const deleteButton = document.createElement('button');
-          deleteButton.textContent = 'Delete';
-          deleteButton.setAttribute('id', index);
-          deleteButton.addEventListener('click', (event) => {
-            deleteTodo(event, day, index);
-          });
-  
-          todoTextItem.appendChild(deleteButton);
-          todoTextElement.appendChild(todoTextItem);
-          
-        });
-  
-        todoItemElement.appendChild(todoTextElement);
-        todoList.appendChild(todoItemElement);
-        todoItemElement.style.display='none';
+        storedData = JSON.parse(storedData);
 
-        
-      }
+        // 날짜별로 todo 아이템을 그룹화합니다.
+        const groupedData = {};
+        storedData.forEach(data => {
+            const { selectedDate, index, todoText } = data;
+            if (!groupedData[selectedDate]) {
+                groupedData[selectedDate] = [];
+            }
+            groupedData[selectedDate].push({ index, todoText });
+        });
+
+        // 그룹화된 데이터를 기반으로 todo 아이템 엘리먼트를 생성합니다.
+        for (const selectedDate in groupedData) {
+            const day = selectedDate.split('-')[2];
+
+            const todoItemElement = document.createElement('li');
+            todoItemElement.setAttribute('id', day);
+            todoItemElement.setAttribute('data-y', selectedDate.split('-')[0]);
+            todoItemElement.setAttribute('data-m', selectedDate.split('-')[1]);
+            todoItemElement.classList.add('todo-item');
+
+            const todoTextElement = document.createElement('span');
+            todoTextElement.setAttribute('id', selectedDate);
+            todoTextElement.textContent = selectedDate + '\n';
+            todoTextElement.style.whiteSpace = 'pre-wrap';
+
+            groupedData[selectedDate].forEach(({ index, todoText }) => {
+                const todoTextItem = document.createElement('span');
+                todoTextItem.setAttribute('id', index);
+                todoTextItem.textContent = '- ' + todoText + '\n';
+                todoTextItem.style.whiteSpace = 'pre-wrap';
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.setAttribute('id', index);
+                deleteButton.addEventListener('click', (event) => {
+                    deleteTodo(event, day, index);
+                });
+
+                todoTextItem.appendChild(deleteButton);
+                todoTextElement.appendChild(todoTextItem);
+
+            });
+
+            todoItemElement.appendChild(todoTextElement);
+            todoList.appendChild(todoItemElement);
+            todoItemElement.style.display = 'none';
+
+
+        }
     }
-  };
-  
-  // 페이지가 로드될 때 loadTodoItems를 호출합니다.
-  window.addEventListener('load', loadTodoItems);
-  
-  
+};
+
+// 페이지가 로드될 때 loadTodoItems를 호출합니다.
+window.addEventListener('load', loadTodoItems);
+
+
 
 
 
